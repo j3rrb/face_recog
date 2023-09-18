@@ -7,8 +7,14 @@ name = "pypi"
 sqlalchemy = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+deepface = "*"
+numpy = "*"
+pillow = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+runapp = "uvicorn main:app --reload"

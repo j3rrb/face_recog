@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, LargeBinary
+from sqlalchemy import Column, Integer, String
 
 from database import Base
 
@@ -6,7 +6,6 @@ from database import Base
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
-    img_bin = Column(LargeBinary, nullable=False)
-    img_mime_type = Column(String, nullable=False)
+    img_string = Column(String, nullable=True)

@@ -1,7 +1,4 @@
 from pydantic import BaseModel
-from typing import Annotated
-
-from fastapi import File
 
 
 class UserBase(BaseModel):
@@ -9,21 +6,16 @@ class UserBase(BaseModel):
 
 
 class CheckFace(BaseModel):
-    img: Annotated[bytes, File()]
-    target: Annotated[bytes, File()]
+    img: str
 
 
 class UserCreate(UserBase):
     name: str
-    img_bin: Annotated[bytes, File()]
-    img_mime_type: str
 
 
 class User(UserBase):
     id: int
     name: str
-    img_bin: Annotated[bytes, File()]
-    img_mime_type: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
