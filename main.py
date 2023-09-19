@@ -36,10 +36,8 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return users
 
 
-@app.post("/users/check-face")
-def check_face(
-    file: UploadFile, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
-):
+@app.post("/users/check-face", response_model=User)
+def check_face(file: UploadFile, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = read_users(skip, limit, db)
 
     if not len(users) > 0:
@@ -63,7 +61,7 @@ def check_face(
         result = FaceMatch.match(image_arr, user_img_arr)
 
         if int(result) == 1:
-            return Response("Faces match!", status_code=202)
+            return user
         else:
             return Response("Face did not match with any user", status_code=404)
 
